@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Jake's GIPHY Website</title>
+
+    <style>
+        h1 {
+            text-align: center;
+            background-color: rgb(152, 25, 25);
+            font-size: 50px;
+            width:100%;
+            height:100%;
+            border-radius: 25px;
+            font-family: 'Times New Roman', Times, serif;
+            color: white;
+  
+        }
+        h3
+        {
+            text-align: center;
+            background-color: white;
+            font-size: 30px;
+            border-radius: 25px;
+            font-family: 'Times New Roman', Times, serif;
+            padding-bottom: 5px;
+        }
+
+
+   
+      
+        #pwd
+        {
+            margin: auto;
+            width: 80%;
+            height: 80%;
+            padding: 10px;
+            text-align: center;
+            height: 500px;
+            background-color: rgb(61, 93, 196);
+            border-radius: 25px;
+            color:white;
+        }
+
+        #usernamelabel, #passwordlabel
+        {
+            margin: 8px 0;
+            color: white;
+            font-size: 15px;
+            font-family:'Times New Roman', Times, serif
+        }
+
+        #userName, #passWord
+        {
+            padding: 12px 10px;
+            box-sizing: border-box;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            
+
+        }
+
+        input[type=button],input[type=submit]
+        {
+            background-color: #41be60; 
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 50px;
+
+        }
+
+        #submitBtn:hover
+        {
+            background-color: white;
+            color:black;
+            border: 2px solid green;
+            transition: .3s ease-in-out;
+            transform: scale(1.1);
+ 
+
+        }
+
+
+
+
+        body {
+            background-color: rgb(255, 255, 255);
+
+
+        }
+
+        #apiEnter
+        {
+            color:black;
+            text-align: center;
+            background-color: rgb(151, 114, 151);
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 15px;
+            margin-left: 30%;
+            margin-right:30%;
+            padding:2%;
+
+        }
+
+        #submissionText
+        {
+            padding: 12px 10px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            width:30%;
+            
+        }
+
+        input[type=radio]
+        {
+            margin-top:1%;
+            margin-bottom: 1%;
+            
+        }
+
+        .radioSelect
+        {
+            font-size: large;
+            padding-right:1%;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+     
+
+        }
+
+
+
+
+
+
+        #image
+        {
+            height:50%;
+            width: 100%;
+            background-color: yellow;
+
+        }
+
+        #clear1
+        {
+    
+            background-color:white;
+        }
+
+
+
+
+    </style>
+
+</head>
+
+    <body>
+
+        <h1>Giphy API</h1>
+        <h3>By Jake</h2><Br>
+
+        <div id = "pwd"  style = "display:none">
+            <h2 id = "loginlabel">Login</h2>
+                <label id = "usernamelabel">Username: </label> 
+                <input type = "text" required placeholder = "Enter Username" id = "userName">
+                <label id = "passwordlabel">Password: </label>
+                <input type = "password" required id = "passWord" placeholder="Enter Password">
+                <input type = "submit" id = 'submitBtn' onclick = "login()">
+        </div>
+
+        <div id = "apiEnter">
+            <div id ="radioButtons">
+
+            <label for = "radioA" class = "radioSelect">
+                <input type="radio"  name = "imgSelect" id = 'radioA' value="Search By Translation">Search By Translation
+            </label>
+
+            <label for = "radioB" class = "radioSelect">
+                <input type = "radio" value = "Search By Tag" name = "imgSelect" id = "radioB">Search By Tag
+            </label>
+
+            <label for="radioC" class = "radioSelect">
+                <input type = "radio"  value = "Search By Name" name = "imgSelect" id = 'radioC' checked>Search By Name
+            </label>
+
+            </div>
+
+        </div>
+
+
+            <div id = "clear1"><br></div>
+        <div id = "search">
+            <input id = "submissionText" type="text" required placeholder="Enter To Search Image" ><br><br>
+            <input type = "submit" onclick = "getImages()">
+            <br>
+            <Br>
+        </div>
+
+        
+
+        <div id = "image">
+            <img id="imgElement" src = ''>
+        </div>
+        
+
+        <script>
+
+            const hashed = "e244f187f696561d5fd7e00f618e7ba641dc52e3c137380f6fa23a854b773aac";
+
+            var getImages = function()
+            {
+
+                //check radio button
+                var checkedRadio = document.querySelector('input[name="imgSelect"]:checked').value;
+                console.log(checkedRadio);
+
+
+                var textBox_text = document.getElementById("submissionText").value || "meme";
+
+                
+
+                var request = new XMLHttpRequest();
+
+                if(checkedRadio == "Search By Translation")
+                {//search ID
+                    request.open('GET', 'https://api.giphy.com/v1/gifs/translate?api_key=pCKwP7bcu7ou0E033MFmHhCLfOqKAr0T&s=' + textBox_text);
+                    console.log("Translation Endpoint");
+                }
+                else if(checkedRadio == "Search By Tag")
+                {//search tag
+                    request.open('GET', 'https://api.giphy.com/v1/gifs/random?api_key=pCKwP7bcu7ou0E033MFmHhCLfOqKAr0T&tag='+ textBox_text +'&rating=r');
+                    console.log("Tag Endpoint");
+                }
+                else
+                {//search by name
+                    request.open('GET', 'https://api.giphy.com/v1/gifs/search?api_key=pCKwP7bcu7ou0E033MFmHhCLfOqKAr0T&q='+ textBox_text +'&limit=3&offset=0&rating=r&lang=en');
+                    console.log("Name Endpoint");
+                }
+                
+
+                request.onload = function() 
+                {   
+                    var data = request.response;
+                    var parsedData = JSON.parse(data);
+                    console.log(parsedData);
+                    console.log(checkedRadio);
+
+                    var imageURL;
+
+                    if(checkedRadio == "Search By Translation")
+                    {//search ID
+                        console.log("Translate response")
+                        imageURL = parsedData.data.images.original.url;
+                        
+                    }
+                    else if(checkedRadio == "Search By Tag")
+                    {//search tag
+                        console.log("Tag response");
+                        imageURL = parsedData.data.images.original.url;
+                    }
+                    else
+                    {//search by name
+                        console.log("Name Response");
+                        imageURL = parsedData.data[0].images.original.url;
+                    }
+                    console.log(imageURL)
+
+
+                    var imgElement = document.getElementById("imgElement");
+                    imgElement.setAttribute('src', imageURL);
+
+                }
+
+                request.send();
+
+            }
+
+            var login = function()
+            {
+                console.log("submit clicked");
+            
+                let pwdEntered = document.getElementById("passWord").value;  
+
+
+
+
+                async function digestMessage(message) {
+                const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);           // hash the message
+                const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+                const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+                return hashHex;
+                }
+
+                var hash = digestMessage(pwdEntered).then((rHash) => 
+                {
+                    console.log("hash: " + rHash.toString());
+                if(rHash === hashed)
+                {
+                    //success
+                    console.log('success')
+                    document.getElementById("pwd").style.display = 'none';
+                    document.getElementById("apiEnter").style.display = 'block';
+                }
+                else
+                {
+                    console.log('failure');
+                    //failure
+                    alert("Incorrect Password, Please Try Again");
+                    
+
+                }
+                });
+   
+                
+
+
+            }
+        </script>
+    </body>
