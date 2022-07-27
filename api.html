@@ -7,23 +7,14 @@
         h1 {
             text-align: center;
             background-color: rgb(152, 25, 25);
-            font-size: 50px;
             width:100%;
-            height:100%;
+            font-size: 50px;
             border-radius: 25px;
             font-family: 'Times New Roman', Times, serif;
             color: white;
   
         }
-        h3
-        {
-            text-align: center;
-            background-color: white;
-            font-size: 30px;
-            border-radius: 25px;
-            font-family: 'Times New Roman', Times, serif;
-            padding-bottom: 5px;
-        }
+
 
 
    
@@ -81,6 +72,7 @@
             border: 2px solid green;
             transition: .3s ease-in-out;
             transform: scale(1.1);
+            cursor:pointer;
  
 
         }
@@ -123,6 +115,7 @@
         {
             margin-top:1%;
             margin-bottom: 1%;
+            cursor:pointer;
             
         }
 
@@ -132,6 +125,7 @@
             padding-right:1%;
             color: white;
             font-family: 'Times New Roman', Times, serif;
+            cursor:pointer;
      
 
         }
@@ -143,9 +137,10 @@
 
         #image
         {
-            height:50%;
+            height:100%;
             width: 100%;
-            background-color: yellow;
+            background-color: white;
+            text-align: center;
 
         }
 
@@ -154,6 +149,45 @@
     
             background-color:white;
         }
+
+        #searchbox
+        {
+            margin-left: 41.5%;
+        }
+
+        #submitSearch
+        {
+            margin-left:46%;
+            margin-bottom:2%;
+        }
+
+        #submitSearch:hover
+        {
+            background-color: white;
+            color:black;
+            border: 2px solid green;
+            transition: .3s ease-in-out;
+            transform: scale(1.1);
+            cursor:pointer;
+        }
+
+        #header_reload:hover
+        {
+            cursor:pointer;
+        }
+
+        #name_header
+        {
+            text-align: center;
+            background-color: white;
+            font-size: 25px;
+            border-radius: 25px;
+            font-family: 'Times New Roman', Times, serif;
+            padding-bottom: 5px;
+            text-decoration: underline;
+            text-decoration-color: indigo;
+        }
+
 
 
 
@@ -164,8 +198,11 @@
 
     <body>
 
-        <h1>Giphy API</h1>
-        <h3>By Jake</h2><Br>
+        <div id = "topFill">
+        <h1 id = "header_reload" onclick="window.location.reload();">Giphy API</h1>
+        </div>
+
+        <h3 id = "name_header">By Jake</h3><Br>
 
         <div id = "pwd"  style = "display:none">
             <h2 id = "loginlabel">Login</h2>
@@ -197,19 +234,23 @@
 
 
             <div id = "clear1"><br></div>
-        <div id = "search">
-            <input id = "submissionText" type="text" required placeholder="Enter To Search Image" ><br><br>
-            <input type = "submit" onclick = "getImages()">
-            <br>
-            <Br>
+
+        <div id = "searchbox">
+            <input id = "submissionText" type="text" required placeholder="Enter To Search Image" >
         </div>
+             <input id = "submitSearch" type = "submit" onclick = "getImages()">
 
         
 
         <div id = "image">
             <img id="imgElement" src = ''>
         </div>
+
         
+
+        <!---------------------------------------------------------------------------------------------------->
+
+        <noscript>Script Disabled!<br>Please enable Script or Use a Different Browser</noscript>
 
         <script>
 
@@ -276,6 +317,8 @@
 
                     var imgElement = document.getElementById("imgElement");
                     imgElement.setAttribute('src', imageURL);
+
+                    document.getElementById("image").style.backgroundColor = "black";
 
                 }
 
