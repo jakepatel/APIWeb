@@ -256,6 +256,8 @@
         <script>
 
             const hashed = "e244f187f696561d5fd7e00f618e7ba641dc52e3c137380f6fa23a854b773aac";
+            const user = "c9472249a75815ad96f0ee6768088fd1ef4db5092eeb2f1fd0c1b336eba895b8";
+            const totalHash = "c7b48cc2a8545bf691a7173b1b8c2ebe8f3e8764a925f14255614c18a7a3dcc6";
 
             var getImages = function()
             {
@@ -332,7 +334,10 @@
                 console.log("submit clicked");
             
                 let pwdEntered = document.getElementById("passWord").value;  
+                let userEntered = document.getElementById("userName").value;
+                let total = userEntered+pwdEntered;
 
+               
 
 
 
@@ -344,25 +349,32 @@
                 return hashHex;
                 }
 
-                var hash = digestMessage(pwdEntered).then((rHash) => 
+
+                //password
+                var hash = digestMessage(total).then((rHash) => 
                 {
-                    console.log("hash: " + rHash.toString());
-                if(rHash === hashed)
+                    //console.log("hash: " + rHash.toString());
+                if(rHash === totalHash)
                 {
-                    //success
                     console.log('success')
                     document.getElementById("pwd").style.display = 'none';
                     document.getElementById("apiEnter").style.display = 'block';
+                   
+
                 }
                 else
                 {
+
                     console.log('failure');
                     //failure
-                    alert("Incorrect Password, Please Try Again");
+                    alert("Incorrect Username or Password, Please Try Again");
+                    userCorrect = false;
+                    passwordCorrect = false;
                     
 
                 }
                 });
+
    
                 
 
