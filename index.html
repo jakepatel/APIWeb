@@ -213,38 +213,40 @@
                 <input type = "submit" id = 'submitBtn' onclick = "login()">
         </div>
 
-        
-        <div id = "apiEnter"   style = "display:none">
-            <div id ="radioButtons">
 
-            <label for = "radioA" class = "radioSelect">
-                <input type="radio"  name = "imgSelect" id = 'radioA' value="Search By Translation">Search By Translation
-            </label>
+        <div id = "enterGranted" style = "display:none">
+            <div id = "apiEnter">
+                <div id ="radioButtons">
 
-            <label for = "radioB" class = "radioSelect">
-                <input type = "radio" value = "Search By Tag" name = "imgSelect" id = "radioB">Search By Tag
-            </label>
+                <label for = "radioA" class = "radioSelect">
+                    <input type="radio"  name = "imgSelect" id = 'radioA' value="Search By Translation">Search By Translation
+                </label>
 
-            <label for="radioC" class = "radioSelect">
-                <input type = "radio"  value = "Search By Name" name = "imgSelect" id = 'radioC' checked>Search By Name
-            </label>
+                <label for = "radioB" class = "radioSelect">
+                    <input type = "radio" value = "Search By Tag" name = "imgSelect" id = "radioB">Search By Tag
+                </label>
+
+                <label for="radioC" class = "radioSelect">
+                    <input type = "radio"  value = "Search By Name" name = "imgSelect" id = 'radioC' checked>Search By Name
+                </label>
+
+                </div>
 
             </div>
 
-        </div>
 
+                <div id = "clear1"><br></div>
 
-            <div id = "clear1"><br></div>
+            <div id = "searchbox">
+                <input id = "submissionText" type="text" required placeholder="Enter To Search Image" >
+            </div>
+                <input id = "submitSearch" type = "submit" onclick = "getImages()">
 
-        <div id = "searchbox">
-            <input id = "submissionText" type="text" required placeholder="Enter To Search Image" >
-        </div>
-             <input id = "submitSearch" type = "submit" onclick = "getImages()">
+            
 
-        
-
-        <div id = "image">
-            <img id="imgElement" src = ''>
+            <div id = "image">
+                <img id="imgElement" src = ''>
+            </div>
         </div>
 
         
@@ -254,10 +256,8 @@
         <noscript>Script Disabled!<br>Please enable Script or Use a Different Browser</noscript>
 
         <script>
-
-            const hashed = "e244f187f696561d5fd7e00f618e7ba641dc52e3c137380f6fa23a854b773aac";
             const user = "c9472249a75815ad96f0ee6768088fd1ef4db5092eeb2f1fd0c1b336eba895b8";
-            const totalHash = "c7b48cc2a8545bf691a7173b1b8c2ebe8f3e8764a925f14255614c18a7a3dcc6";
+            const totalHash = "133e3b3d6ea8c2b749ec5f3af7a3cf4d2db18ea1b2b09eb08dd8cc428cebde84";
 
             var getImages = function()
             {
@@ -358,7 +358,7 @@
                 {
                     console.log('success')
                     document.getElementById("pwd").style.display = 'none';
-                    document.getElementById("apiEnter").style.display = 'block';
+                    document.getElementById("enterGranted").style.display = 'block';
                    
 
                 }
